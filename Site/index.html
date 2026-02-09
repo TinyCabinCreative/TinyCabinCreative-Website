@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tiny Cabin Creative - Web Design & Development</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Work+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="app">
+        <!-- Navigation -->
+        <nav class="nav" :class="{ 'nav--scrolled': scrolled }">
+            <div class="nav__container">
+                <a href="index.html" class="nav__logo">
+                    <span class="nav__logo-text">Tiny Cabin Creative</span>
+                </a>
+                <button class="nav__toggle" @click="mobileMenuOpen = !mobileMenuOpen" :aria-expanded="mobileMenuOpen">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav__menu" :class="{ 'nav__menu--open': mobileMenuOpen }">
+                    <li><a href="index.html" class="nav__link nav__link--active">Home</a></li>
+                    <li><a href="portfolio.html" class="nav__link">Portfolio</a></li>
+                    <li><a href="about.html" class="nav__link">About</a></li>
+                    <li><a href="contact.html" class="nav__link">Contact</a></li>
+                    <li><a href="#" class="nav__cta" @click.prevent="openCalendly">Book a Call</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero__background"></div>
+            <div class="hero__container">
+                <div class="hero__content">
+                    <h1 class="hero__title" v-animate>
+                        Craft Digital Experiences That Feel Like Home
+                    </h1>
+                    <p class="hero__subtitle" v-animate>
+                        Thoughtful web design and development for businesses that value authenticity and connection
+                    </p>
+                    <div class="hero__cta-group" v-animate>
+                        <a href="#" class="btn btn--primary" @click.prevent="openCalendly">Schedule a Discovery Call</a>
+                        <a href="contact.html" class="btn btn--secondary">Send Project Details</a>
+                    </div>
+                </div>
+            </div>
+            <div class="hero__scroll-indicator" v-animate>
+                <span>Scroll to explore</span>
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M10 4v12m0 0l-4-4m4 4l4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section class="services">
+            <div class="services__container">
+                <div class="section-header" v-animate>
+                    <h2 class="section-title">What We Create</h2>
+                    <p class="section-description">From concept to launch, we build digital spaces that resonate</p>
+                </div>
+                <div class="services__grid">
+                    <div class="service-card" v-animate>
+                        <div class="service-card__icon">
+                            <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                                <rect x="5" y="8" width="30" height="24" rx="2" stroke="currentColor" stroke-width="2"/>
+                                <path d="M5 14h30M12 20h16M12 24h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <h3 class="service-card__title">Web Design</h3>
+                        <p class="service-card__description">Beautiful, intuitive interfaces that tell your story and convert visitors into customers</p>
+                    </div>
+                    <div class="service-card" v-animate>
+                        <div class="service-card__icon">
+                            <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                                <path d="M8 12l12-6 12 6v16l-12 6-12-6V12z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                                <path d="M8 12l12 6m0 0l12-6m-12 6v16" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <h3 class="service-card__title">Development</h3>
+                        <p class="service-card__description">Clean, performant code that brings designs to life across all devices</p>
+                    </div>
+                    <div class="service-card" v-animate>
+                        <div class="service-card__icon">
+                            <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                                <circle cx="20" cy="20" r="14" stroke="currentColor" stroke-width="2"/>
+                                <path d="M20 12v8l6 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <h3 class="service-card__title">Strategy</h3>
+                        <p class="service-card__description">Thoughtful planning that aligns your digital presence with your business goals</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="cta-section__container">
+                <div class="cta-section__content" v-animate>
+                    <h2 class="cta-section__title">Ready to Start Your Project?</h2>
+                    <p class="cta-section__description">Let's have a conversation about your vision. No pressure, just possibilities.</p>
+                    <div class="cta-section__buttons">
+                        <a href="#" class="btn btn--primary btn--large" @click.prevent="openCalendly">Book Your Free Consultation</a>
+                        <a href="portfolio.html" class="btn btn--ghost btn--large">View Our Work</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Process Section -->
+        <section class="process">
+            <div class="process__container">
+                <div class="section-header" v-animate>
+                    <h2 class="section-title">Our Approach</h2>
+                    <p class="section-description">A collaborative journey from idea to execution</p>
+                </div>
+                <div class="process__timeline">
+                    <div class="process-step" v-animate>
+                        <div class="process-step__number">01</div>
+                        <h3 class="process-step__title">Discovery</h3>
+                        <p class="process-step__description">We listen, ask questions, and understand your goals, audience, and brand identity</p>
+                    </div>
+                    <div class="process-step" v-animate>
+                        <div class="process-step__number">02</div>
+                        <h3 class="process-step__title">Design</h3>
+                        <p class="process-step__description">We create visual concepts that capture your essence and engage your audience</p>
+                    </div>
+                    <div class="process-step" v-animate>
+                        <div class="process-step__number">03</div>
+                        <h3 class="process-step__title">Development</h3>
+                        <p class="process-step__description">We build with precision, ensuring every pixel works beautifully on every device</p>
+                    </div>
+                    <div class="process-step" v-animate>
+                        <div class="process-step__number">04</div>
+                        <h3 class="process-step__title">Launch & Support</h3>
+                        <p class="process-step__description">We go live together and provide ongoing support as your business grows</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final CTA -->
+        <section class="final-cta">
+            <div class="final-cta__container">
+                <div class="final-cta__content" v-animate>
+                    <h2 class="final-cta__title">Let's Build Something Beautiful</h2>
+                    <p class="final-cta__description">
+                        Whether you're starting from scratch or refreshing an existing site, we're here to help you create a digital home that truly represents your business.
+                    </p>
+                    <a href="#" class="btn btn--primary btn--large" @click.prevent="openCalendly">Schedule Your Discovery Call</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer__container">
+                <div class="footer__content">
+                    <div class="footer__brand">
+                        <h3 class="footer__logo">Tiny Cabin Creative</h3>
+                        <p class="footer__tagline">Crafting digital experiences with care</p>
+                    </div>
+                    <div class="footer__links">
+                        <div class="footer__column">
+                            <h4 class="footer__heading">Navigate</h4>
+                            <ul class="footer__list">
+                                <li><a href="index.html">Home</a></li>
+                                <li><a href="portfolio.html">Portfolio</a></li>
+                                <li><a href="about.html">About</a></li>
+                                <li><a href="contact.html">Contact</a></li>
+                            </ul>
+                        </div>
+                        <div class="footer__column">
+                            <h4 class="footer__heading">Connect</h4>
+                            <ul class="footer__list">
+                                <li><a href="#" @click.prevent="openCalendly">Book a Call</a></li>
+                                <li><a href="contact.html">Send a Message</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer__bottom">
+                    <p>&copy; 2026 Tiny Cabin Creative. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
