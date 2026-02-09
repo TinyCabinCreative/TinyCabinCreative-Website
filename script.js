@@ -5,29 +5,36 @@
 const CONFIG = {
   // Replace with your actual Calendly link
   calendlyUrl: 'https://calendly.com/your-calendly-link',
-
+  
   // Form submission endpoint (replace with your actual endpoint)
   formEndpoint: 'https://formspree.io/f/YOUR_FORM_ID',
 };
 
 /* ============================================
-   Vue Application
+   Initialize when page loads
    ============================================ */
 
-// Wait for DOM to be ready
-document.addEventListener('DOMContentLoaded', function () {
+window.addEventListener('load', function() {
+  console.log('Page loaded, initializing Vue...');
+  
+  // Check if Vue is available
+  if (typeof Vue === 'undefined') {
+    console.error('Vue is not loaded! Check your internet connection or the CDN link.');
+    return;
+  }
+  
   const { createApp } = Vue;
-
-  createApp({
+  
+  const app = createApp({
     data() {
       return {
         // Navigation state
         scrolled: false,
         mobileMenuOpen: false,
-
+        
         // Portfolio state
         expandedProject: null,
-
+        
         // Form state
         formData: {
           name: '',
@@ -45,46 +52,31 @@ document.addEventListener('DOMContentLoaded', function () {
         formSubmitted: false,
       };
     },
-
+    
     mounted() {
+      console.log('Vue app mounted successfully!');
+      
       // Handle scroll events for navigation
       window.addEventListener('scroll', this.handleScroll);
       this.handleScroll();
-
-      // Initialize animations on page load
-      setTimeout(() => {
-        initAnimations();
-      }, 100);
-
-      // Re-initialize animations on scroll
-      window.addEventListener('scroll', () => {
-        initAnimations();
+      
+      // Initialize animations
+      this.$nextTick(() => {
+        this.initAnimations();
       });
     },
-
-    beforeUnmount() {
-      window.removeEventListener('scroll', this.handleScroll);
-    },
-
+    
     methods: {
       /* Navigation Methods */
       handleScroll() {
         this.scrolled = window.scrollY > 50;
       },
-
+      
       /* Calendly Methods */
       openCalendly() {
-        // Open Calendly in a new window
-        // For production, you can use Calendly's embed widget or popup
         window.open(CONFIG.calendlyUrl, '_blank');
-
-        // Alternative: If you're using Calendly's popup widget, uncomment below
-        // Make sure to include Calendly's script in your HTML
-        // if (window.Calendly) {
-        //   window.Calendly.initPopupWidget({ url: CONFIG.calendlyUrl });
-        // }
       },
-
+      
       /* Portfolio Methods */
       toggleProject(index) {
         if (this.expandedProject === index) {
@@ -93,20 +85,17 @@ document.addEventListener('DOMContentLoaded', function () {
           this.expandedProject = index;
         }
       },
-
+      
       /* Form Methods */
       async submitForm() {
-        // Basic validation
         if (!this.formData.name || !this.formData.email || !this.formData.budget || !this.formData.projectOutline) {
           alert('Please fill in all required fields.');
           return;
         }
-
+        
         this.isSubmitting = true;
-
+        
         try {
-          // In production, replace this with your actual form handling
-          // Example using Formspree:
           const response = await fetch(CONFIG.formEndpoint, {
             method: 'POST',
             headers: {
@@ -114,12 +103,11 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             body: JSON.stringify(this.formData)
           });
-
+          
           if (response.ok) {
             this.formSubmitted = true;
             this.resetForm();
-
-            // Hide success message after 5 seconds
+            
             setTimeout(() => {
               this.formSubmitted = false;
             }, 5000);
@@ -133,7 +121,7 @@ document.addEventListener('DOMContentLoaded', function () {
           this.isSubmitting = false;
         }
       },
-
+      
       resetForm() {
         this.formData = {
           name: '',
@@ -148,53 +136,37 @@ document.addEventListener('DOMContentLoaded', function () {
           hearAbout: ''
         };
       },
-
+      
       /* Animation Methods */
-      handleAnimations() {
-        // Trigger animations on scroll
-        initAnimations();
-      }
-    },
-
-    directives: {
-      // Custom directive for animation initialization
-      animate: {
-        mounted(el) {
-          // Element will be animated when it comes into view
-          el.style.opacity = '0';
-          el.style.transform = 'translateY(20px)';
-        }
+      initAnimations() {
+        const elements = document.querySelectorAll('[v-animate]');
+        
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('animated');
+            }
+          });
+        }, {
+          threshold: 0.1,
+          rootMargin: '0px 0px -100px 0px'
+        });
+        
+        elements.forEach(element => {
+          observer.observe(element);
+        });
       }
     }
-  }).mount('#app');
-
-  // Initialize animations after Vue mounts
-  setTimeout(() => {
-    initAnimations();
-  }, 100);
+  });
+  
+  // Mount the app
+  try {
+    app.mount('#app');
+    console.log('Vue mounted to #app');
+  } catch (error) {
+    console.error('Failed to mount Vue:', error);
+  }
 });
-
-/* ============================================
-   Animation Helper Function
-   ============================================ */
-function initAnimations() {
-  const elements = document.querySelectorAll('[v-animate]');
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('animated');
-      }
-    });
-  }, {
-    threshold: 0.1,
-    rootMargin: '0px 0px -100px 0px'
-  });
-
-  elements.forEach(element => {
-    observer.observe(element);
-  });
-}
 
 /* ============================================
    Vanilla JavaScript Enhancements
@@ -203,20 +175,20 @@ function initAnimations() {
 // Smooth scroll for anchor links
 document.addEventListener('DOMContentLoaded', () => {
   const anchorLinks = document.querySelectorAll('a[href^="#"]');
-
+  
   anchorLinks.forEach(link => {
     link.addEventListener('click', (e) => {
       const href = link.getAttribute('href');
-
+      
       // Don't prevent default for empty anchors
       if (href === '#' || href === '') return;
-
+      
       e.preventDefault();
-
+      
       const target = document.querySelector(href);
       if (target) {
         const offsetTop = target.offsetTop - 80; // Account for fixed nav
-
+        
         window.scrollTo({
           top: offsetTop,
           behavior: 'smooth'
@@ -231,7 +203,7 @@ document.addEventListener('click', (e) => {
   const nav = document.querySelector('.nav');
   const toggle = document.querySelector('.nav__toggle');
   const menu = document.querySelector('.nav__menu');
-
+  
   if (menu && menu.classList.contains('nav__menu--open')) {
     if (!nav.contains(e.target)) {
       // Dispatch a custom event to close the menu via Vue
@@ -251,7 +223,7 @@ window.addEventListener('closeMobileMenu', () => {
 // Add loading state to images
 document.addEventListener('DOMContentLoaded', () => {
   const images = document.querySelectorAll('img[data-src]');
-
+  
   const imageObserver = new IntersectionObserver((entries, observer) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -262,7 +234,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
-
+  
   images.forEach(img => imageObserver.observe(img));
 });
 
@@ -304,11 +276,11 @@ document.addEventListener('DOMContentLoaded', () => {
       document.body.classList.add('user-is-tabbing');
     }
   });
-
+  
   document.body.addEventListener('mousedown', () => {
     document.body.classList.remove('user-is-tabbing');
   });
-
+  
   // Add skip to main content link
   const skipLink = document.createElement('a');
   skipLink.href = '#main-content';
@@ -324,15 +296,15 @@ document.addEventListener('DOMContentLoaded', () => {
     text-decoration: none;
     z-index: 10000;
   `;
-
+  
   skipLink.addEventListener('focus', () => {
     skipLink.style.top = '0';
   });
-
+  
   skipLink.addEventListener('blur', () => {
     skipLink.style.top = '-40px';
   });
-
+  
   document.body.insertBefore(skipLink, document.body.firstChild);
 });
 
@@ -342,12 +314,12 @@ const formValidation = {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return re.test(email);
   },
-
+  
   phone: (phone) => {
     const re = /^[\d\s\-\+\(\)]+$/;
     return phone === '' || re.test(phone);
   },
-
+  
   required: (value) => {
     return value && value.trim() !== '';
   }
