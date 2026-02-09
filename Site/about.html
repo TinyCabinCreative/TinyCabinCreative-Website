@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Tiny Cabin Creative</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Work+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="app">
+        <!-- Navigation -->
+        <nav class="nav" :class="{ 'nav--scrolled': scrolled }">
+            <div class="nav__container">
+                <a href="index.html" class="nav__logo">
+                    <span class="nav__logo-text">Tiny Cabin Creative</span>
+                </a>
+                <button class="nav__toggle" @click="mobileMenuOpen = !mobileMenuOpen" :aria-expanded="mobileMenuOpen">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav__menu" :class="{ 'nav__menu--open': mobileMenuOpen }">
+                    <li><a href="index.html" class="nav__link">Home</a></li>
+                    <li><a href="portfolio.html" class="nav__link">Portfolio</a></li>
+                    <li><a href="about.html" class="nav__link nav__link--active">About</a></li>
+                    <li><a href="contact.html" class="nav__link">Contact</a></li>
+                    <li><a href="#" class="nav__cta" @click.prevent="openCalendly">Book a Call</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Page Header -->
+        <section class="page-header page-header--about">
+            <div class="page-header__container">
+                <h1 class="page-header__title" v-animate>About Us</h1>
+                <p class="page-header__subtitle" v-animate>The story behind the cabin</p>
+            </div>
+        </section>
+
+        <!-- About Content -->
+        <section class="about">
+            <div class="about__container">
+                
+                <!-- Story Section -->
+                <div class="about__section" v-animate>
+                    <div class="about__content">
+                        <h2 class="about__title">Small Studio, Big Heart</h2>
+                        <div class="about__text">
+                            <p>
+                                Tiny Cabin Creative was born from a simple belief: the best digital experiences feel like home. Not flashy or overwhelming, but warm, welcoming, and thoughtfully crafted. We're a small studio that believes in quality over quantity, relationships over transactions, and building websites that actually serve the people who use them.
+                            </p>
+                            <p>
+                                Every project we take on is an opportunity to create something meaningful. We don't work with just anyone—we partner with businesses and individuals who share our values of authenticity, sustainability, and genuine connection with their audience. Whether you're a local coffee roaster, a wellness practitioner, or a maker with a story to tell, we're here to help you share it with the world.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="about__image-wrapper">
+                        <div class="about__image" style="background: linear-gradient(135deg, #8B7355 0%, #A68A64 50%, #8B7355 100%);">
+                            <!-- Placeholder for studio/workspace photo -->
+                            <div class="about__image-placeholder">
+                                <svg width="60" height="60" viewBox="0 0 60 60" fill="none" opacity="0.3">
+                                    <rect x="5" y="15" width="50" height="35" rx="2" stroke="currentColor" stroke-width="2"/>
+                                    <circle cx="20" cy="30" r="6" stroke="currentColor" stroke-width="2"/>
+                                    <path d="M5 40l12-10 8 6 10-8 15 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                <span>Studio / Workspace Photo</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Philosophy Section -->
+                <div class="about__section about__section--reverse" v-animate>
+                    <div class="about__image-wrapper">
+                        <div class="about__image" style="background: linear-gradient(135deg, #6B8E23 0%, #8FBC8F 50%, #6B8E23 100%);">
+                            <!-- Placeholder for nature/inspiration photo -->
+                            <div class="about__image-placeholder">
+                                <svg width="60" height="60" viewBox="0 0 60 60" fill="none" opacity="0.3">
+                                    <rect x="5" y="15" width="50" height="35" rx="2" stroke="currentColor" stroke-width="2"/>
+                                    <circle cx="20" cy="30" r="6" stroke="currentColor" stroke-width="2"/>
+                                    <path d="M5 40l12-10 8 6 10-8 15 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                <span>Nature / Inspiration Photo</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="about__content">
+                        <h2 class="about__title">Our Philosophy</h2>
+                        <div class="about__text">
+                            <p>
+                                We believe great design isn't about following trends—it's about understanding people. Before we write a single line of code or push a pixel, we take time to understand your business, your audience, and your goals. We ask questions, listen deeply, and then craft solutions that are as unique as you are.
+                            </p>
+                            <p>
+                                Our approach is rooted in collaboration. You're the expert in your business, and we're experts in translating that expertise into digital experiences that work. We don't believe in talking over your head with jargon or disappearing for weeks at a time. Throughout the entire process, you'll know exactly what we're building and why.
+                            </p>
+                            <p>
+                                Sustainability matters to us, too. We build websites that are fast, efficient, and easy to maintain. No bloated code, no unnecessary complexity—just clean, purposeful solutions that will serve you well for years to come.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Founder Section -->
+                <div class="about__section" v-animate>
+                    <div class="about__content">
+                        <h2 class="about__title">Meet the Team</h2>
+                        <div class="about__text">
+                            <p>
+                                Tiny Cabin Creative is led by a designer and developer who left the corporate world to build a more intentional practice. After years of creating digital experiences for big brands, the desire to work more closely with small businesses and creative entrepreneurs became impossible to ignore.
+                            </p>
+                            <p>
+                                What started as a side project in a literal tiny cabin in the woods has grown into a boutique studio serving clients across the country. Despite the growth, we've kept our values intact: every project gets personal attention, every client becomes a partner, and every website is built with care.
+                            </p>
+                            <p>
+                                When we're not designing and coding, you'll find us hiking local trails, experimenting with new recipes, or getting lost in a good book. We believe the best creative work comes from a balanced life, and we bring that same philosophy to our partnerships with clients.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="about__image-wrapper">
+                        <div class="about__image" style="background: linear-gradient(135deg, #D4A574 0%, #C19A6B 50%, #B8956A 100%);">
+                            <!-- Placeholder for founder/team photo -->
+                            <div class="about__image-placeholder">
+                                <svg width="60" height="60" viewBox="0 0 60 60" fill="none" opacity="0.3">
+                                    <rect x="5" y="15" width="50" height="35" rx="2" stroke="currentColor" stroke-width="2"/>
+                                    <circle cx="20" cy="30" r="6" stroke="currentColor" stroke-width="2"/>
+                                    <path d="M5 40l12-10 8 6 10-8 15 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                <span>Founder / Team Photo</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Values Section -->
+                <div class="about__values" v-animate>
+                    <h2 class="about__values-title">What Drives Us</h2>
+                    <div class="about__values-grid">
+                        <div class="value-card">
+                            <div class="value-card__icon">
+                                <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                                    <path d="M20 8v24M8 20h24" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+                                    <circle cx="20" cy="20" r="14" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                            </div>
+                            <h3 class="value-card__title">Authenticity</h3>
+                            <p class="value-card__description">We create honest digital experiences that reflect who you really are, not who you think you should be.</p>
+                        </div>
+                        <div class="value-card">
+                            <div class="value-card__icon">
+                                <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                                    <path d="M14 18l6 6 12-12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M34 20c0 7.732-6.268 14-14 14S6 27.732 6 20 12.268 6 20 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                            </div>
+                            <h3 class="value-card__title">Quality</h3>
+                            <p class="value-card__description">Every detail matters. We obsess over the small things so your website feels polished and professional.</p>
+                        </div>
+                        <div class="value-card">
+                            <div class="value-card__icon">
+                                <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                                    <path d="M20 12c-4.418 0-8 3.582-8 8 0 6 8 14 8 14s8-8 8-14c0-4.418-3.582-8-8-8z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                                    <circle cx="20" cy="20" r="3" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                            </div>
+                            <h3 class="value-card__title">Sustainability</h3>
+                            <p class="value-card__description">We build efficient, maintainable websites that won't require constant overhauls or expensive updates.</p>
+                        </div>
+                        <div class="value-card">
+                            <div class="value-card__icon">
+                                <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                                    <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/>
+                                    <circle cx="28" cy="12" r="4" stroke="currentColor" stroke-width="2"/>
+                                    <circle cx="20" cy="28" r="4" stroke="currentColor" stroke-width="2"/>
+                                    <path d="M15 14l-2 10m10-10l2 10m-10-8h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                            </div>
+                            <h3 class="value-card__title">Collaboration</h3>
+                            <p class="value-card__description">Your input shapes everything we create. This is a partnership, not a handoff.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="cta-section__container">
+                <div class="cta-section__content" v-animate>
+                    <h2 class="cta-section__title">Let's Work Together</h2>
+                    <p class="cta-section__description">If our approach resonates with you, we'd love to hear about your project</p>
+                    <div class="cta-section__buttons">
+                        <a href="#" class="btn btn--primary btn--large" @click.prevent="openCalendly">Schedule a Call</a>
+                        <a href="contact.html" class="btn btn--ghost btn--large">Get In Touch</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer__container">
+                <div class="footer__content">
+                    <div class="footer__brand">
+                        <h3 class="footer__logo">Tiny Cabin Creative</h3>
+                        <p class="footer__tagline">Crafting digital experiences with care</p>
+                    </div>
+                    <div class="footer__links">
+                        <div class="footer__column">
+                            <h4 class="footer__heading">Navigate</h4>
+                            <ul class="footer__list">
+                                <li><a href="index.html">Home</a></li>
+                                <li><a href="portfolio.html">Portfolio</a></li>
+                                <li><a href="about.html">About</a></li>
+                                <li><a href="contact.html">Contact</a></li>
+                            </ul>
+                        </div>
+                        <div class="footer__column">
+                            <h4 class="footer__heading">Connect</h4>
+                            <ul class="footer__list">
+                                <li><a href="#" @click.prevent="openCalendly">Book a Call</a></li>
+                                <li><a href="contact.html">Send a Message</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer__bottom">
+                    <p>&copy; 2026 Tiny Cabin Creative. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

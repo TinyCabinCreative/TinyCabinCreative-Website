@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Tiny Cabin Creative</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Work+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="app">
+        <!-- Navigation -->
+        <nav class="nav" :class="{ 'nav--scrolled': scrolled }">
+            <div class="nav__container">
+                <a href="index.html" class="nav__logo">
+                    <span class="nav__logo-text">Tiny Cabin Creative</span>
+                </a>
+                <button class="nav__toggle" @click="mobileMenuOpen = !mobileMenuOpen" :aria-expanded="mobileMenuOpen">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav__menu" :class="{ 'nav__menu--open': mobileMenuOpen }">
+                    <li><a href="index.html" class="nav__link">Home</a></li>
+                    <li><a href="portfolio.html" class="nav__link">Portfolio</a></li>
+                    <li><a href="about.html" class="nav__link">About</a></li>
+                    <li><a href="contact.html" class="nav__link nav__link--active">Contact</a></li>
+                    <li><a href="#" class="nav__cta" @click.prevent="openCalendly">Book a Call</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Page Header -->
+        <section class="page-header">
+            <div class="page-header__container">
+                <h1 class="page-header__title" v-animate>Get In Touch</h1>
+                <p class="page-header__subtitle" v-animate>Let's start a conversation about your project</p>
+            </div>
+        </section>
+
+        <!-- Contact Options -->
+        <section class="contact-options">
+            <div class="contact-options__container">
+                <div class="contact-option" v-animate>
+                    <div class="contact-option__icon">
+                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                            <rect x="6" y="10" width="36" height="28" rx="2" stroke="currentColor" stroke-width="2"/>
+                            <path d="M6 14l18 12 18-12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h3 class="contact-option__title">Send Project Details</h3>
+                    <p class="contact-option__description">Fill out our intake form below and we'll get back to you within 24 hours</p>
+                </div>
+                <div class="contact-option" v-animate>
+                    <div class="contact-option__icon">
+                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                            <rect x="10" y="6" width="28" height="36" rx="2" stroke="currentColor" stroke-width="2"/>
+                            <path d="M16 12h16M16 18h16M16 24h12M16 30h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <h3 class="contact-option__title">Book a Discovery Call</h3>
+                    <p class="contact-option__description">Prefer to talk? Schedule a free 30-minute consultation to discuss your needs</p>
+                    <a href="#" class="contact-option__cta" @click.prevent="openCalendly">View Available Times →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Form -->
+        <section class="contact-form-section">
+            <div class="contact-form-section__container">
+                <div class="contact-form-wrapper" v-animate>
+                    <h2 class="contact-form__title">Project Intake Form</h2>
+                    <p class="contact-form__description">Tell us about your vision and we'll help bring it to life</p>
+                    
+                    <form class="contact-form" @submit.prevent="submitForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name" class="form-label">Your Name *</label>
+                                <input 
+                                    type="text" 
+                                    id="name" 
+                                    v-model="formData.name" 
+                                    class="form-input" 
+                                    required
+                                    placeholder="Jane Smith"
+                                >
+                            </div>
+                            <div class="form-group">
+                                <label for="email" class="form-label">Email Address *</label>
+                                <input 
+                                    type="email" 
+                                    id="email" 
+                                    v-model="formData.email" 
+                                    class="form-input" 
+                                    required
+                                    placeholder="jane@example.com"
+                                >
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="company" class="form-label">Company/Organization</label>
+                                <input 
+                                    type="text" 
+                                    id="company" 
+                                    v-model="formData.company" 
+                                    class="form-input"
+                                    placeholder="Optional"
+                                >
+                            </div>
+                            <div class="form-group">
+                                <label for="phone" class="form-label">Phone Number</label>
+                                <input 
+                                    type="tel" 
+                                    id="phone" 
+                                    v-model="formData.phone" 
+                                    class="form-input"
+                                    placeholder="Optional"
+                                >
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="budget" class="form-label">Project Budget *</label>
+                            <select 
+                                id="budget" 
+                                v-model="formData.budget" 
+                                class="form-select"
+                                required
+                            >
+                                <option value="">Select a budget range</option>
+                                <option value="5k-10k">$5,000 - $10,000</option>
+                                <option value="10k-20k">$10,000 - $20,000</option>
+                                <option value="20k-35k">$20,000 - $35,000</option>
+                                <option value="35k+">$35,000+</option>
+                                <option value="flexible">Flexible / Not Sure</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="timeline" class="form-label">Desired Timeline</label>
+                            <select 
+                                id="timeline" 
+                                v-model="formData.timeline" 
+                                class="form-select"
+                            >
+                                <option value="">Select a timeline</option>
+                                <option value="urgent">ASAP (2-4 weeks)</option>
+                                <option value="moderate">Standard (6-10 weeks)</option>
+                                <option value="flexible">Flexible (3+ months)</option>
+                                <option value="planning">Just planning ahead</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="project-type" class="form-label">Project Type</label>
+                            <div class="form-checkbox-group">
+                                <label class="form-checkbox">
+                                    <input type="checkbox" v-model="formData.projectTypes" value="new-website">
+                                    <span>New Website</span>
+                                </label>
+                                <label class="form-checkbox">
+                                    <input type="checkbox" v-model="formData.projectTypes" value="redesign">
+                                    <span>Website Redesign</span>
+                                </label>
+                                <label class="form-checkbox">
+                                    <input type="checkbox" v-model="formData.projectTypes" value="web-app">
+                                    <span>Web Application</span>
+                                </label>
+                                <label class="form-checkbox">
+                                    <input type="checkbox" v-model="formData.projectTypes" value="ecommerce">
+                                    <span>E-commerce</span>
+                                </label>
+                                <label class="form-checkbox">
+                                    <input type="checkbox" v-model="formData.projectTypes" value="branding">
+                                    <span>Branding/Design</span>
+                                </label>
+                                <label class="form-checkbox">
+                                    <input type="checkbox" v-model="formData.projectTypes" value="other">
+                                    <span>Other</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="project-outline" class="form-label">Project Outline *</label>
+                            <textarea 
+                                id="project-outline" 
+                                v-model="formData.projectOutline" 
+                                class="form-textarea"
+                                rows="6"
+                                required
+                                placeholder="Tell us about your project goals, target audience, and any specific features or functionality you have in mind..."
+                            ></textarea>
+                            <span class="form-hint">Be as detailed as you'd like. The more we know, the better we can help.</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="inspiration" class="form-label">Inspiration & References</label>
+                            <textarea 
+                                id="inspiration" 
+                                v-model="formData.inspiration" 
+                                class="form-textarea"
+                                rows="3"
+                                placeholder="Any websites, designs, or examples you love? Include URLs if you have them."
+                            ></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="hear-about" class="form-label">How did you hear about us?</label>
+                            <select 
+                                id="hear-about" 
+                                v-model="formData.hearAbout" 
+                                class="form-select"
+                            >
+                                <option value="">Select an option</option>
+                                <option value="google">Google Search</option>
+                                <option value="social">Social Media</option>
+                                <option value="referral">Referral</option>
+                                <option value="portfolio">Saw Your Portfolio</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn--primary btn--large" :disabled="isSubmitting">
+                                <span v-if="!isSubmitting">Submit Project Details</span>
+                                <span v-else>Sending...</span>
+                            </button>
+                        </div>
+
+                        <transition name="fade">
+                            <div v-if="formSubmitted" class="form-success">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                                    <path d="M8 12l3 3 5-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                <span>Thank you! We'll be in touch within 24 hours.</span>
+                            </div>
+                        </transition>
+                    </form>
+                </div>
+
+                <!-- Sidebar -->
+                <aside class="contact-sidebar" v-animate>
+                    <div class="contact-info-card">
+                        <h3 class="contact-info-card__title">Prefer to Talk?</h3>
+                        <p class="contact-info-card__description">
+                            Sometimes it's easier to discuss your project over a call. Book a free 30-minute discovery session and let's explore your ideas together.
+                        </p>
+                        <a href="#" class="btn btn--secondary btn--full" @click.prevent="openCalendly">
+                            Schedule a Discovery Call
+                        </a>
+                    </div>
+
+                    <div class="contact-info-card">
+                        <h3 class="contact-info-card__title">What Happens Next?</h3>
+                        <ul class="contact-info-list">
+                            <li>
+                                <strong>We review your details</strong>
+                                <span>Within 24 hours, we'll review your project information</span>
+                            </li>
+                            <li>
+                                <strong>Initial consultation</strong>
+                                <span>We'll reach out to schedule a call to discuss your vision</span>
+                            </li>
+                            <li>
+                                <strong>Custom proposal</strong>
+                                <span>If we're a good fit, we'll create a tailored proposal for your project</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="contact-info-card contact-info-card--accent">
+                        <h3 class="contact-info-card__title">Not Sure Where to Start?</h3>
+                        <p class="contact-info-card__description">
+                            That's perfectly fine! Many of our clients begin with just a rough idea. We're here to help you clarify your goals and explore what's possible.
+                        </p>
+                    </div>
+                </aside>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer__container">
+                <div class="footer__content">
+                    <div class="footer__brand">
+                        <h3 class="footer__logo">Tiny Cabin Creative</h3>
+                        <p class="footer__tagline">Crafting digital experiences with care</p>
+                    </div>
+                    <div class="footer__links">
+                        <div class="footer__column">
+                            <h4 class="footer__heading">Navigate</h4>
+                            <ul class="footer__list">
+                                <li><a href="index.html">Home</a></li>
+                                <li><a href="portfolio.html">Portfolio</a></li>
+                                <li><a href="about.html">About</a></li>
+                                <li><a href="contact.html">Contact</a></li>
+                            </ul>
+                        </div>
+                        <div class="footer__column">
+                            <h4 class="footer__heading">Connect</h4>
+                            <ul class="footer__list">
+                                <li><a href="#" @click.prevent="openCalendly">Book a Call</a></li>
+                                <li><a href="contact.html">Send a Message</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer__bottom">
+                    <p>&copy; 2026 Tiny Cabin Creative. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Tiny Cabin Creative</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Work+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="app">
+        <!-- Navigation -->
+        <nav class="nav" :class="{ 'nav--scrolled': scrolled }">
+            <div class="nav__container">
+                <a href="index.html" class="nav__logo">
+                    <span class="nav__logo-text">Tiny Cabin Creative</span>
+                </a>
+                <button class="nav__toggle" @click="mobileMenuOpen = !mobileMenuOpen" :aria-expanded="mobileMenuOpen">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav__menu" :class="{ 'nav__menu--open': mobileMenuOpen }">
+                    <li><a href="index.html" class="nav__link">Home</a></li>
+                    <li><a href="portfolio.html" class="nav__link nav__link--active">Portfolio</a></li>
+                    <li><a href="about.html" class="nav__link">About</a></li>
+                    <li><a href="contact.html" class="nav__link">Contact</a></li>
+                    <li><a href="#" class="nav__cta" @click.prevent="openCalendly">Book a Call</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Page Header -->
+        <section class="page-header">
+            <div class="page-header__container">
+                <h1 class="page-header__title" v-animate>Our Work</h1>
+                <p class="page-header__subtitle" v-animate>Selected projects that showcase our approach to thoughtful design and development</p>
+            </div>
+        </section>
+
+        <!-- Portfolio Grid -->
+        <section class="portfolio">
+            <div class="portfolio__container">
+                
+                <!-- Project 1 -->
+                <div class="project" v-animate>
+                    <div class="project__preview" @click="toggleProject(0)">
+                        <div class="project__image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                            <div class="project__overlay">
+                                <span class="project__cta">View Project</span>
+                            </div>
+                        </div>
+                        <div class="project__summary">
+                            <span class="project__category">E-commerce</span>
+                            <h2 class="project__title">Artisan Goods Marketplace</h2>
+                            <p class="project__excerpt">A beautiful online storefront connecting local artisans with conscious consumers</p>
+                            <button class="project__toggle" :class="{ 'project__toggle--open': expandedProject === 0 }">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                    <path d="M5 7.5l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <transition name="expand">
+                        <div v-if="expandedProject === 0" class="project__details">
+                            <div class="project__details-content">
+                                <div class="project__info">
+                                    <h3 class="project__details-title">Project Overview</h3>
+                                    <p class="project__details-text">
+                                        We partnered with a collective of local artisans to create an e-commerce platform that celebrates handcrafted goods. The challenge was to build a marketplace that felt personal and authentic while providing robust shopping functionality.
+                                    </p>
+                                    <h4 class="project__subheading">What We Delivered</h4>
+                                    <ul class="project__list">
+                                        <li>Custom WordPress e-commerce site with WooCommerce</li>
+                                        <li>Individual artisan profile pages with storytelling</li>
+                                        <li>Advanced filtering and search capabilities</li>
+                                        <li>Mobile-optimized shopping experience</li>
+                                        <li>Integrated inventory management system</li>
+                                    </ul>
+                                    <h4 class="project__subheading">Results</h4>
+                                    <p class="project__details-text">
+                                        The platform launched with 25 artisans and grew to over 60 within six months. Mobile sales increased by 145%, and average time on site improved by 3 minutes.
+                                    </p>
+                                    <div class="project__meta">
+                                        <div class="project__meta-item">
+                                            <span class="project__meta-label">Timeline</span>
+                                            <span class="project__meta-value">12 weeks</span>
+                                        </div>
+                                        <div class="project__meta-item">
+                                            <span class="project__meta-label">Services</span>
+                                            <span class="project__meta-value">Design, Development, Strategy</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </transition>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="project" v-animate>
+                    <div class="project__preview" @click="toggleProject(1)">
+                        <div class="project__image" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                            <div class="project__overlay">
+                                <span class="project__cta">View Project</span>
+                            </div>
+                        </div>
+                        <div class="project__summary">
+                            <span class="project__category">Brand Website</span>
+                            <h2 class="project__title">Wellness Studio Redesign</h2>
+                            <p class="project__excerpt">A serene digital space that reflects the calm and intention of a yoga and meditation studio</p>
+                            <button class="project__toggle" :class="{ 'project__toggle--open': expandedProject === 1 }">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                    <path d="M5 7.5l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <transition name="expand">
+                        <div v-if="expandedProject === 1" class="project__details">
+                            <div class="project__details-content">
+                                <div class="project__info">
+                                    <h3 class="project__details-title">Project Overview</h3>
+                                    <p class="project__details-text">
+                                        A local wellness studio needed a website that embodied their philosophy of mindfulness and balance. Their previous site was cluttered and difficult to navigate, especially on mobile devices where most of their audience browsed.
+                                    </p>
+                                    <h4 class="project__subheading">What We Delivered</h4>
+                                    <ul class="project__list">
+                                        <li>Clean, minimal design with breathing room</li>
+                                        <li>Integrated class scheduling and booking system</li>
+                                        <li>Teacher profiles with personal philosophies</li>
+                                        <li>Blog for wellness tips and studio updates</li>
+                                        <li>Meditation timer web app feature</li>
+                                    </ul>
+                                    <h4 class="project__subheading">Results</h4>
+                                    <p class="project__details-text">
+                                        Online bookings increased by 230% in the first month. The studio reported that new students often mentioned the website as a factor in choosing them over competitors.
+                                    </p>
+                                    <div class="project__meta">
+                                        <div class="project__meta-item">
+                                            <span class="project__meta-label">Timeline</span>
+                                            <span class="project__meta-value">8 weeks</span>
+                                        </div>
+                                        <div class="project__meta-item">
+                                            <span class="project__meta-label">Services</span>
+                                            <span class="project__meta-value">Design, Development, Content Strategy</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </transition>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="project" v-animate>
+                    <div class="project__preview" @click="toggleProject(2)">
+                        <div class="project__image" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                            <div class="project__overlay">
+                                <span class="project__cta">View Project</span>
+                            </div>
+                        </div>
+                        <div class="project__summary">
+                            <span class="project__category">Web Application</span>
+                            <h2 class="project__title">Recipe Management Platform</h2>
+                            <p class="project__excerpt">An intuitive tool for home cooks to organize, scale, and share their favorite recipes</p>
+                            <button class="project__toggle" :class="{ 'project__toggle--open': expandedProject === 2 }">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                    <path d="M5 7.5l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <transition name="expand">
+                        <div v-if="expandedProject === 2" class="project__details">
+                            <div class="project__details-content">
+                                <div class="project__info">
+                                    <h3 class="project__details-title">Project Overview</h3>
+                                    <p class="project__details-text">
+                                        A food blogger wanted to create a membership platform where users could save, organize, and scale recipes. The application needed to handle complex recipe data while remaining simple and delightful to use.
+                                    </p>
+                                    <h4 class="project__subheading">What We Delivered</h4>
+                                    <ul class="project__list">
+                                        <li>Custom Vue.js web application</li>
+                                        <li>Recipe scaling calculator with unit conversion</li>
+                                        <li>Shopping list generator with categorization</li>
+                                        <li>User accounts with personal recipe collections</li>
+                                        <li>Social sharing and recipe commenting features</li>
+                                    </ul>
+                                    <h4 class="project__subheading">Results</h4>
+                                    <p class="project__details-text">
+                                        The platform launched with 500 beta users and reached 5,000 active users within four months. Users reported saving an average of 2 hours per week on meal planning.
+                                    </p>
+                                    <div class="project__meta">
+                                        <div class="project__meta-item">
+                                            <span class="project__meta-label">Timeline</span>
+                                            <span class="project__meta-value">16 weeks</span>
+                                        </div>
+                                        <div class="project__meta-item">
+                                            <span class="project__meta-label">Services</span>
+                                            <span class="project__meta-value">Full Stack Development, UX Design</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </transition>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="project" v-animate>
+                    <div class="project__preview" @click="toggleProject(3)">
+                        <div class="project__image" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                            <div class="project__overlay">
+                                <span class="project__cta">View Project</span>
+                            </div>
+                        </div>
+                        <div class="project__summary">
+                            <span class="project__category">Portfolio Site</span>
+                            <h2 class="project__title">Photographer Portfolio</h2>
+                            <p class="project__excerpt">A stunning visual showcase that lets the photography speak for itself</p>
+                            <button class="project__toggle" :class="{ 'project__toggle--open': expandedProject === 3 }">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                    <path d="M5 7.5l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <transition name="expand">
+                        <div v-if="expandedProject === 3" class="project__details">
+                            <div class="project__details-content">
+                                <div class="project__info">
+                                    <h3 class="project__details-title">Project Overview</h3>
+                                    <p class="project__details-text">
+                                        A wedding and portrait photographer needed a portfolio site that would showcase their work without distraction. The focus had to be entirely on the images, with minimal interface elements.
+                                    </p>
+                                    <h4 class="project__subheading">What We Delivered</h4>
+                                    <ul class="project__list">
+                                        <li>Full-screen image galleries with smooth transitions</li>
+                                        <li>Custom lightbox for detailed image viewing</li>
+                                        <li>Password-protected client galleries</li>
+                                        <li>Contact form with inquiry categorization</li>
+                                        <li>Optimized image delivery for fast loading</li>
+                                    </ul>
+                                    <h4 class="project__subheading">Results</h4>
+                                    <p class="project__details-text">
+                                        The photographer reported a 180% increase in quality inquiries and booked four weddings in the first month after launch. Site speed improved by 65% despite the image-heavy content.
+                                    </p>
+                                    <div class="project__meta">
+                                        <div class="project__meta-item">
+                                            <span class="project__meta-label">Timeline</span>
+                                            <span class="project__meta-value">6 weeks</span>
+                                        </div>
+                                        <div class="project__meta-item">
+                                            <span class="project__meta-label">Services</span>
+                                            <span class="project__meta-value">Design, Development, Image Optimization</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </transition>
+                </div>
+
+                <!-- Project 5 -->
+                <div class="project" v-animate>
+                    <div class="project__preview" @click="toggleProject(4)">
+                        <div class="project__image" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">
+                            <div class="project__overlay">
+                                <span class="project__cta">View Project</span>
+                            </div>
+                        </div>
+                        <div class="project__summary">
+                            <span class="project__category">Non-Profit</span>
+                            <h2 class="project__title">Community Garden Initiative</h2>
+                            <p class="project__excerpt">A grassroots website that grows community engagement and volunteer participation</p>
+                            <button class="project__toggle" :class="{ 'project__toggle--open': expandedProject === 4 }">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                    <path d="M5 7.5l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <transition name="expand">
+                        <div v-if="expandedProject === 4" class="project__details">
+                            <div class="project__details-content">
+                                <div class="project__info">
+                                    <h3 class="project__details-title">Project Overview</h3>
+                                    <p class="project__details-text">
+                                        A community garden non-profit needed an affordable website to coordinate volunteers, share gardening resources, and promote their mission. The budget was modest but the impact needed to be significant.
+                                    </p>
+                                    <h4 class="project__subheading">What We Delivered</h4>
+                                    <ul class="project__list">
+                                        <li>Volunteer signup and shift scheduling system</li>
+                                        <li>Resource library with gardening guides</li>
+                                        <li>Event calendar with weather integration</li>
+                                        <li>Donation processing through Stripe</li>
+                                        <li>Photo gallery showcasing garden progress</li>
+                                    </ul>
+                                    <h4 class="project__subheading">Results</h4>
+                                    <p class="project__details-text">
+                                        Volunteer registrations increased by 320% in the first season. The organization secured three major grants, with funders citing the professional web presence as evidence of organizational capacity.
+                                    </p>
+                                    <div class="project__meta">
+                                        <div class="project__meta-item">
+                                            <span class="project__meta-label">Timeline</span>
+                                            <span class="project__meta-value">10 weeks</span>
+                                        </div>
+                                        <div class="project__meta-item">
+                                            <span class="project__meta-label">Services</span>
+                                            <span class="project__meta-value">Design, Development, Training</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </transition>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="cta-section__container">
+                <div class="cta-section__content" v-animate>
+                    <h2 class="cta-section__title">Ready to Start Your Project?</h2>
+                    <p class="cta-section__description">Let's create something meaningful together</p>
+                    <div class="cta-section__buttons">
+                        <a href="#" class="btn btn--primary btn--large" @click.prevent="openCalendly">Schedule a Discovery Call</a>
+                        <a href="contact.html" class="btn btn--ghost btn--large">Send Project Details</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer__container">
+                <div class="footer__content">
+                    <div class="footer__brand">
+                        <h3 class="footer__logo">Tiny Cabin Creative</h3>
+                        <p class="footer__tagline">Crafting digital experiences with care</p>
+                    </div>
+                    <div class="footer__links">
+                        <div class="footer__column">
+                            <h4 class="footer__heading">Navigate</h4>
+                            <ul class="footer__list">
+                                <li><a href="index.html">Home</a></li>
+                                <li><a href="portfolio.html">Portfolio</a></li>
+                                <li><a href="about.html">About</a></li>
+                                <li><a href="contact.html">Contact</a></li>
+                            </ul>
+                        </div>
+                        <div class="footer__column">
+                            <h4 class="footer__heading">Connect</h4>
+                            <ul class="footer__list">
+                                <li><a href="#" @click.prevent="openCalendly">Book a Call</a></li>
+                                <li><a href="contact.html">Send a Message</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer__bottom">
+                    <p>&copy; 2026 Tiny Cabin Creative. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
